@@ -1,0 +1,23 @@
+/***************** App.module.css ***************/
+
+@mixin invisibleInput { border: 0px; height: 1px; width: 1px; margin: -1px; padding: 0px;
+    clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: absolute; }
+
+.row { display: flex; column-gap: 8px;
+    & > *:nth-child(4n):not(:last-child) { margin-right: 8px; }
+}
+
+.cellList { display: flex; flex-direction: column; row-gap: 8px; }
+
+.cell { $cell: &; cursor: pointer; 
+    &__input { 
+        @include invisibleInput();
+        &:checked + #{$cell}__content { 
+            background-color: #005da5; 
+        }
+        &:focus-visible + #{$cell}__content {
+            outline: solid 4px #90cdf4; outline-offset: 2px;
+        }
+    }
+    &__content { width: 30px; height: 40px; background-color: #ccc; border-radius: 3px; }
+}
