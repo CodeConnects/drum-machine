@@ -5,8 +5,23 @@
 
 .container { display: grid; row-gap: 16px; }
 
+.grid { display: flex; flex-direction: column; row-gap: 8px; }
+
 .row { display: flex; column-gap: 8px;
     & > *:nth-child(4n):not(:last-child) { margin-right: 8px; }
+}
+
+.lamp {
+    $lamp: &;
+    &__input { 
+        @include invisibleInput;
+        &:checked + #{$lamp}__content { 
+            background-color: #ff5b06; 
+        }
+    }
+    &__content { 
+        width: 14px; height: 14px; background-color: #999; border-radius: 999px; margin: 0 8px;
+    }
 }
 
 .cellList { display: flex; flex-direction: column; row-gap: 8px; }
