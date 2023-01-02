@@ -3,6 +3,8 @@
 @mixin invisibleInput { border: 0px; height: 1px; width: 1px; margin: -1px; padding: 0px;
     clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: absolute; }
 
+.container { display: grid; row-gap: 16px; }
+
 .row { display: flex; column-gap: 8px;
     & > *:nth-child(4n):not(:last-child) { margin-right: 8px; }
 }
@@ -20,4 +22,12 @@
         }
     }
     &__content { width: 30px; height: 40px; background-color: #ccc; border-radius: 3px; }
+}
+
+.controls { display: flex; column-gap: 16px; }
+
+.button { border: none; cursor: pointer; appearance: none; background-color: #005da5;  color: white;
+    width: 80px; line-height: 2; border-radius: 4px; font-weight: 700; transition: background-color 0.3s;
+
+    &:hover { background-color: #4281b2; }
 }
