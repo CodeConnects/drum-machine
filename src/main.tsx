@@ -5,6 +5,25 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <App samples={[
+      {
+        url: "/hat-closed.wav",
+        name: "CH"
+      },
+      {
+        url: "/clap.wav",
+        name: "CL"
+      },
+      {
+        url: "/snare.wav",
+        name: "SD"
+      },
+      {
+        url: "/kick.wav",
+        name: "BD"
+      },
+    ]}
+    numOfSteps={16}
+    />
   </React.StrictMode>,
-)
+);
