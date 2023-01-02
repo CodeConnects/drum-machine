@@ -19,7 +19,8 @@ export default function App({ samples, numOfSteps }:Props) {
   const [isPlaying, setIsPlaying] = React.useState(false);
 
   const tracksRef = React.useRef<Track[]>([]);
-  const stepsRef = React.useRef<HTMLInputElement[][]>([[]]);
+  const stepRefs = React.useRef<HTMLInputElement[][]>([[]]);
+  const lampRefs = React.useRef<HTMLInputElement[]>([]);
   const seqRef = React.useRef<Tone.Sequence | null>(null);
 
   const trackIds = [...Array(samples.length).keys()] as const;
@@ -48,9 +49,10 @@ export default function App({ samples, numOfSteps }:Props) {
     seqRef.current = new Tone.Sequence(
       (time, step) => {
         tracksRef.current.forEach(trk => {
-          if (stepsRef.current[trk.id]?.[step]?.checked) {
+          if (stepRefs.current[trk.id]?.[step]?.checked) {
             trk.sampler.triggerAttack(NOTE, time);
           }
+          lampRefs.current[step].checked = true;
         });
       }, 
       [...stepIds],
@@ -67,6 +69,24 @@ export default function App({ samples, numOfSteps }:Props) {
   return (
     <div className={styles.container}>
       <div className={styles.grid}>
+        <div className={styles.row}>
+          {stepIds.map(stepId => (
+            <label className={styles.lamp}>
+              <input 
+                type="radio" 
+                name="lamp" 
+                id={"lamp-" + stepId} 
+                disabled
+                ref={(elm) => {
+                  if (!elm) return;
+                  lampRefs.current[stepId] = elm;
+                }}
+                className={styles.lamp__input}
+              />
+              <div className={styles.lamp__content} ></div>
+            </label>
+          ))}
+        </div>
         <div className={styles.cellList}>
           {trackIds.map((trackId) => (
             <div key={trackId} className={styles.row}>
@@ -80,10 +100,10 @@ export default function App({ samples, numOfSteps }:Props) {
                       className={styles.cell__input}
                       ref={(elm) => {
                         if (!elm) return;
-                        if (!stepsRef.current[trackId]) {
-                          stepsRef.current[trackId] = [];
+                        if (!stepRefs.current[trackId]) {
+                          stepRefs.current[trackId] = [];
                         }
-                        stepsRef.current[trackId][stepId] = elm;
+                        stepRefs.current[trackId][stepId] = elm;
                       }}
                     />
                     <div className={styles.cell__content}></div>
