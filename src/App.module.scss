@@ -3,6 +3,10 @@
 $cellHeight: 40px;
 $rowGap: 8px;
 $columnGap: 16px;
+$lightBg: #ccc;
+$cellBg: #fff;
+
+
 
 @mixin invisibleInput { border: 0px; height: 1px; width: 1px; 
     margin: -1px; padding: 0px;
@@ -26,7 +30,7 @@ $columnGap: 16px;
         }
     }
     &__content { 
-        width: 14px; height: 14px; background-color: #999; 
+        width: 14px; height: 14px; background-color: $lightBg; 
         border-radius: 999px; margin: 0 8px;
     }
 }
@@ -44,10 +48,11 @@ $columnGap: 16px;
         }
     }
     &__content { width: 30px; height: $cellHeight; 
-        background-color: #ccc; border-radius: 3px; }
+        background-color: $cellBg; border-radius: 3px; }
 }
 
-.controls { display: flex; align-items: center; column-gap: $columnGap; grid-column: 2; }
+.controls { display: flex; flex-direction: row-reverse; 
+    align-items: cener; column-gap: $columnGap; grid-column: 2; }
 
 .button { border: none; cursor: pointer; appearance: none; 
     background-color: #005da5;  color: white;
@@ -58,3 +63,5 @@ $columnGap: 16px;
 }
 
 .fader { display: flex; align-items: center; column-gap: $columnGap; }
+
+.soundLabels { padding:20px 8px 0 0; text-align: center; display: grid; align-items: center; }
