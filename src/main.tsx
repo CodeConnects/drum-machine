@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 
+// todo this const the default with UI to change
+const numSteps = 24;
+
+// todo have two sounds be the default, snare and clap
+// todo add/delete row function
+// todo select list of samples on add row
+// todo sample upload
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App samples={[
@@ -23,7 +30,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         name: "BD"
       },
     ]}
-    numOfSteps={16}
+    numOfSteps={numSteps}
     />
   </React.StrictMode>,
 );
