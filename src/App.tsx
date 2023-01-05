@@ -37,7 +37,7 @@ export default function App({ samples, numOfSteps }:Props) {
     }
   };
 
-  const handleBPM = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
     Tone.Transport.bpm.value = Number(e.target.value);
   };
 
@@ -128,19 +128,19 @@ export default function App({ samples, numOfSteps }:Props) {
 
       <div className={styles.controls}>
 
-        <label className={styles.fader} id="bpm-ctrl">
-          <span>BPM</span>
-          <input type="range" min={20} max={400} step={1} defaultValue={120} onChange={handleBPM} />
-        </label>
+        <button className={styles.button} onClick={handleStart}>
+          {isPlaying ? "pause" : "start"}
+        </button>
 
-        <label className={styles.fader} id="volume-ctrl">
-          <span>Volume</span>
+        <label className={styles.fader} id="vol-ctrl">
+          <span>volume</span>
           <input type="range" min={0} max={0} step={0.01} defaultValue={0.5} onChange={handleVolume} />
         </label>
         
-        <button className={styles.button} onClick={handleStart}>
-          {isPlaying ? "Pause" : "Start"}
-        </button>
+        <label className={styles.fader} id="speed-ctrl">
+          <span>speed</span>
+          <input type="range" min={20} max={400} step={1} defaultValue={120} onChange={handleSpeed} />
+        </label>
 
       </div>
 
