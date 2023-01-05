@@ -18,17 +18,17 @@ type Props = {
 export default function App({ samples, numOfSteps }:Props) {
   const [isPlaying, setIsPlaying] = React.useState(false);
 
-  const tracksRef = React.useRef<Track[]>([]);
-  const stepRefs = React.useRef<HTMLInputElement[][]>([[]]);
-  const lampRefs = React.useRef<HTMLInputElement[]>([]);
+  const trkRef = React.useRef<Track[]>([]);
+  const stepRef = React.useRef<HTMLInputElement[][]>([[]]);
+  const activeRef = React.useRef<HTMLInputElement[]>([]);
   const seqRef = React.useRef<Tone.Sequence | null>(null);
 
   const trackIds = [...Array(samples.length).keys()] as const;
   const stepIds = [...Array(numOfSteps).keys()] as const;
 
-  const handleStartClick = async () => {
+  const handleStart = async () => {
     if (Tone.Transport.state === "started") {
-      Tone.Transport.stop();
+      Tone.Transport.pause();
       setIsPlaying(false);
     } else {
       await Tone.start();
@@ -37,8 +37,16 @@ export default function App({ samples, numOfSteps }:Props) {
     }
   };
 
+  const handleSpeed = () => {
+
+  };
+
+  const handleVolume = () => {
+
+  };
+
   React.useEffect(() => {
-    tracksRef.current = samples.map((sample, i) => ({
+    trkRef.current = samples.map((sample, i) => ({
       id: i,
       sampler: new Tone.Sampler({
         urls: {
@@ -48,11 +56,11 @@ export default function App({ samples, numOfSteps }:Props) {
     }));
     seqRef.current = new Tone.Sequence(
       (time, step) => {
-        tracksRef.current.forEach(trk => {
-          if (stepRefs.current[trk.id]?.[step]?.checked) {
+        trkRef.current.forEach(trk => {
+          if (stepRef.current[trk.id]?.[step]?.checked) {
             trk.sampler.triggerAttack(NOTE, time);
           }
-          lampRefs.current[step].checked = true;
+          activeRef.current[step].checked = true;
         });
       }, 
       [...stepIds],
@@ -62,7 +70,7 @@ export default function App({ samples, numOfSteps }:Props) {
     return () => {
       // todo look into this
       seqRef.current?.dispose();
-      tracksRef.current.forEach((trk) => trk.sampler.dispose());
+      trkRef.current.forEach((trk) => trk.sampler.dispose());
     };
   }, [samples, numOfSteps]);
 
@@ -71,19 +79,19 @@ export default function App({ samples, numOfSteps }:Props) {
       <div className={styles.grid}>
         <div className={styles.row}>
           {stepIds.map(stepId => (
-            <label className={styles.lamp}>
+            <label className={styles.active}>
               <input 
                 type="radio" 
-                name="lamp" 
-                id={"lamp-" + stepId} 
+                name="active" 
+                id={"active-" + stepId} 
                 disabled
                 ref={(elm) => {
                   if (!elm) return;
-                  lampRefs.current[stepId] = elm;
+                  activeRef.current[stepId] = elm;
                 }}
-                className={styles.lamp__input}
+                className={styles.active__input}
               />
-              <div className={styles.lamp__content} ></div>
+              <div className={styles.active__content} ></div>
             </label>
           ))}
         </div>
@@ -100,10 +108,10 @@ export default function App({ samples, numOfSteps }:Props) {
                       className={styles.cell__input}
                       ref={(elm) => {
                         if (!elm) return;
-                        if (!stepRefs.current[trackId]) {
-                          stepRefs.current[trackId] = [];
+                        if (!stepRef.current[trackId]) {
+                          stepRef.current[trackId] = [];
                         }
-                        stepRefs.current[trackId][stepId] = elm;
+                        stepRef.current[trackId][stepId] = elm;
                       }}
                     />
                     <div className={styles.cell__content}></div>
@@ -115,7 +123,7 @@ export default function App({ samples, numOfSteps }:Props) {
         </div>
       </div>
       <div className={styles.controls}>
-        <button className={styles.button} onClick={handleStartClick}>
+        <button className={styles.button} onClick={handleStart}>
           {isPlaying ? "Pause" : "Start"}
         </button>
       </div>

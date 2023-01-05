@@ -13,11 +13,11 @@
     & > *:nth-child(4n):not(:last-child) { margin-right: 8px; }
 }
 
-.lamp {
-    $lamp: &;
+.active {
+    $active: &;
     &__input { 
         @include invisibleInput;
-        &:checked + #{$lamp}__content { 
+        &:checked + #{$active}__content { 
             background-color: #ff5b06; 
         }
     }
