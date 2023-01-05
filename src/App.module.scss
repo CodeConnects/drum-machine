@@ -2,10 +2,8 @@
 
 $cellHeight: 40px;
 $rowGap: 8px;
-$columnGap: 16px;
 $lightBg: #ccc;
 $cellBg: #fff;
-
 
 
 @mixin invisibleInput { border: 0px; height: 1px; width: 1px; 
@@ -51,17 +49,5 @@ $cellBg: #fff;
         background-color: $cellBg; border-radius: 3px; }
 }
 
-.controls { display: flex; flex-direction: row-reverse; 
-    align-items: cener; column-gap: $columnGap; grid-column: 2; }
-
-.button { border: none; cursor: pointer; appearance: none; 
-    background-color: #005da5;  color: white;
-    width: 80px; line-height: 2; border-radius: 4px; 
-    font-weight: 700; transition: background-color 0.3s;
-
-    &:hover { background-color: #4281b2; }
-}
-
-.fader { display: flex; align-items: center; column-gap: $columnGap; }
-
-.soundLabels { padding:20px 8px 0 0; text-align: center; display: grid; align-items: center; }
+.soundLabels { padding:20px 8px 0 0; text-align: center; 
+    display: grid; align-items: center; }
