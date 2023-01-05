@@ -37,12 +37,12 @@ export default function App({ samples, numOfSteps }:Props) {
     }
   };
 
-  const handleSpeed = () => {
-
+  const handleBPM = (e: React.ChangeEvent<HTMLInputElement>) => {
+    Tone.Transport.bpm.value = Number(e.target.value);
   };
 
-  const handleVolume = () => {
-
+  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    Tone.Destination.volume.value = Tone.gainToDb(Number(e.target.value));
   };
 
   React.useEffect(() => {
@@ -62,20 +62,23 @@ export default function App({ samples, numOfSteps }:Props) {
           }
           activeRef.current[step].checked = true;
         });
-      }, 
-      [...stepIds],
-      "16n"
+      }, [...stepIds]
     ).start(0);
 
     return () => {
       // todo look into this
       seqRef.current?.dispose();
-      trkRef.current.forEach((trk) => trk.sampler.dispose());
+      trkRef.current.forEach((trk) => void trk.sampler.dispose());
     };
   }, [samples, numOfSteps]);
 
   return (
     <div className={styles.container}>
+
+      <div className={styles.soundLabels}>
+        {samples.map((sample) => (<div>{sample.name}</div>))}
+      </div>
+
       <div className={styles.grid}>
         <div className={styles.row}>
           {stepIds.map(stepId => (
@@ -122,11 +125,25 @@ export default function App({ samples, numOfSteps }:Props) {
           ))}
         </div>
       </div>
+
       <div className={styles.controls}>
+
+        <label className={styles.fader} id="bpm-ctrl">
+          <span>BPM</span>
+          <input type="range" min={20} max={400} step={1} defaultValue={120} onChange={handleBPM} />
+        </label>
+
+        <label className={styles.fader} id="volume-ctrl">
+          <span>Volume</span>
+          <input type="range" min={0} max={0} step={0.01} defaultValue={0.5} onChange={handleVolume} />
+        </label>
+        
         <button className={styles.button} onClick={handleStart}>
           {isPlaying ? "Pause" : "Start"}
         </button>
+
       </div>
+
     </div>
   );
 }
