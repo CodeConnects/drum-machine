@@ -1,5 +1,9 @@
 /***************** App.module.css ***************/
 
+$cellHeight: 40px;
+$rowGap: 8px;
+$columnGap: 16px;
+
 @mixin invisibleInput { border: 0px; height: 1px; width: 1px; 
     margin: -1px; padding: 0px;
     clip: rect(0px, 0px, 0px, 0px); overflow: hidden; 
@@ -7,7 +11,7 @@
 
 .container { display: grid; row-gap: 16px; }
 
-.grid { display: flex; flex-direction: column; row-gap: 8px; }
+.grid { display: flex; flex-direction: column; row-gap: $rowGap; }
 
 .row { display: flex; column-gap: 8px;
     & > *:nth-child(4n):not(:last-child) { margin-right: 8px; }
@@ -27,7 +31,7 @@
     }
 }
 
-.cellList { display: flex; flex-direction: column; row-gap: 8px; }
+.cellList { display: flex; flex-direction: column; row-gap: $rowGap; }
 
 .cell { $cell: &; cursor: pointer; 
     &__input { 
@@ -39,11 +43,11 @@
             outline: solid 4px #90cdf4; outline-offset: 2px;
         }
     }
-    &__content { width: 30px; height: 40px; 
+    &__content { width: 30px; height: $cellHeight; 
         background-color: #ccc; border-radius: 3px; }
 }
 
-.controls { display: flex; column-gap: 16px; }
+.controls { display: flex; align-items: center; column-gap: $columnGap; grid-column: 2; }
 
 .button { border: none; cursor: pointer; appearance: none; 
     background-color: #005da5;  color: white;
@@ -52,3 +56,5 @@
 
     &:hover { background-color: #4281b2; }
 }
+
+.fader { display: flex; align-items: center; column-gap: $columnGap; }
