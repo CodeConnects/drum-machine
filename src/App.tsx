@@ -1,6 +1,8 @@
 import React from 'react';
 import * as Tone from 'tone';
 
+import Controls from './components/Controls'
+
 import styles from './App.module.scss';
 
 const NOTE = 'C2';
@@ -16,7 +18,6 @@ type Props = {
 };
 
 export default function App({ samples, numOfSteps }:Props) {
-  const [isPlaying, setIsPlaying] = React.useState(false);
 
   const trkRef = React.useRef<Track[]>([]);
   const stepRef = React.useRef<HTMLInputElement[][]>([[]]);
@@ -25,25 +26,6 @@ export default function App({ samples, numOfSteps }:Props) {
 
   const trackIds = [...Array(samples.length).keys()] as const;
   const stepIds = [...Array(numOfSteps).keys()] as const;
-
-  const handleStart = async () => {
-    if (Tone.Transport.state === "started") {
-      Tone.Transport.pause();
-      setIsPlaying(false);
-    } else {
-      await Tone.start();
-      Tone.Transport.start();
-      setIsPlaying(true);
-    }
-  };
-
-  const handleSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
-    Tone.Transport.bpm.value = Number(e.target.value);
-  };
-
-  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-    Tone.Destination.volume.value = Tone.gainToDb(Number(e.target.value));
-  };
 
   React.useEffect(() => {
     trkRef.current = samples.map((sample, i) => ({
@@ -126,23 +108,7 @@ export default function App({ samples, numOfSteps }:Props) {
         </div>
       </div>
 
-      <div className={styles.controls}>
-
-        <button className={styles.button} onClick={handleStart}>
-          {isPlaying ? "pause" : "start"}
-        </button>
-
-        <label className={styles.fader} id="vol-ctrl">
-          <span>volume</span>
-          <input type="range" min={0} max={0} step={0.01} defaultValue={0.5} onChange={handleVolume} />
-        </label>
-        
-        <label className={styles.fader} id="speed-ctrl">
-          <span>speed</span>
-          <input type="range" min={20} max={400} step={1} defaultValue={120} onChange={handleSpeed} />
-        </label>
-
-      </div>
+      <Controls />
 
     </div>
   );
