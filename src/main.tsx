@@ -14,20 +14,17 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App samples={[
       {
-        url: "/hat-closed.wav",
-        name: "CH"
-      },
-      {
-        url: "/clap.wav",
-        name: "CL"
-      },
-      {
         url: "/snare.wav",
-        name: "SD"
-      },
-      {
+        name: "snare"
+      },{
+        url: "/clap.wav",
+        name: "clap"
+      },{
+        url: "/hat-closed.wav",
+        name: "hat"
+      },{
         url: "/kick.wav",
-        name: "BD"
+        name: "kick"
       },
     ]}
     numOfSteps={numSteps}
