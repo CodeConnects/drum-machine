@@ -4,7 +4,7 @@ $columnGap: 16px;
 
 
 .controls { display: flex; flex-direction: row-reverse; 
-    align-items: cener; column-gap: $columnGap; grid-column: 2; }
+    column-gap: $columnGap; grid-column: 2; }
 
 .button { border: none; cursor: pointer; appearance: none; 
     background-color: #005da5;  color: white;
