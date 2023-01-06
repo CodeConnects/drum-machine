@@ -17,6 +17,8 @@ type Props = {
   numOfSteps: number;
 };
 
+
+
 export default function App({ samples, numOfSteps }:Props) {
 
   const trkRef = React.useRef<Track[]>([]);
@@ -28,6 +30,9 @@ export default function App({ samples, numOfSteps }:Props) {
   const stepIds = [...Array(numOfSteps).keys()] as const;
 
   React.useEffect(() => {
+    
+    // iterate through selected samples
+    // create a new Tone Sampler for each sample
     trkRef.current = samples.map((sample, i) => ({
       id: i,
       sampler: new Tone.Sampler({
@@ -36,6 +41,9 @@ export default function App({ samples, numOfSteps }:Props) {
         },
       }).toDestination(),
     }));
+
+
+    // start a new Tone Sequence
     seqRef.current = new Tone.Sequence(
       (time, step) => {
         trkRef.current.forEach(trk => {
@@ -57,11 +65,13 @@ export default function App({ samples, numOfSteps }:Props) {
   return (
     <div className={styles.container}>
 
+      {/* Sound Labels */}
       <div className={styles.soundLabels}>
         {samples.map((sample) => (<div>{sample.name}</div>))}
       </div>
 
       <div className={styles.grid}>
+      
         <div className={styles.row}>
           {stepIds.map(stepId => (
             <label className={styles.active}>
@@ -80,6 +90,8 @@ export default function App({ samples, numOfSteps }:Props) {
             </label>
           ))}
         </div>
+
+
         <div className={styles.cellList}>
           {trackIds.map((trackId) => (
             <div key={trackId} className={styles.row}>
