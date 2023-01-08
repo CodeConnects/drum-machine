@@ -1,7 +1,8 @@
 import React from 'react';
 import * as Tone from 'tone';
 
-import Controls from './components/Controls'
+import Controls from './components/Controls';
+import SampleLabels from './components/SampleLabels';
 
 import styles from './App.module.scss';
 
@@ -65,10 +66,7 @@ export default function App({ samples, numOfSteps }:Props) {
   return (
     <div className={styles.container}>
 
-      {/* Sound Labels */}
-      <div className={styles.soundLabels}>
-        {samples.map((sample) => (<div>{sample.name}</div>))}
-      </div>
+      <SampleLabels />
 
       <div className={styles.grid}>
       
