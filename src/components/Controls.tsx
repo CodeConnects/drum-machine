@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Tone from 'tone';
 
-import styles from './Controls.module.scss';
+import styles from './styles/Controls.module.scss';
 
 export default function Controls(): JSX.Element {
 

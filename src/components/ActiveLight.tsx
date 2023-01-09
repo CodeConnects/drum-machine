@@ -1,5 +1,5 @@
 
-import styles from './ActiveLight.module.scss';
+import styles from './styles/ActiveLight.module.scss';
 
 export default function ActiveLight(/*stepIds, activeRef*/) {
 

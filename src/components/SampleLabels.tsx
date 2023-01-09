@@ -1,4 +1,4 @@
-import styles from './SampleLabels.module.scss';
+import styles from './styles/SampleLabels.module.scss';
 
 export default function SampleLabels(samples: any) {
     return(
