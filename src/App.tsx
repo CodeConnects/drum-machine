@@ -3,6 +3,7 @@ import * as Tone from 'tone';
 
 import Controls from './components/Controls';
 import SampleLabels from './components/SampleLabels';
+import ThemeSwitch from './components/ThemeSwitch';
 
 import styles from './App.module.scss';
 
@@ -65,6 +66,8 @@ export default function App({ samples, numOfSteps }:Props) {
 
   return (
     <div className={styles.container}>
+
+      <ThemeSwitch />
 
       <SampleLabels />
 
