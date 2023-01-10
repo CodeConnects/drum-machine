@@ -1,29 +1,29 @@
-import React from 'react';
-import * as Tone from 'tone';
+import React from 'react'
+import * as Tone from 'tone'
 
-import styles from './styles/Controls.module.scss';
+import styles from './styles/Controls.module.scss'
 
-export default function Controls(): JSX.Element {
+export default function Controls() {
 
     const [isPlaying, setIsPlaying] = React.useState(false);
 
-    async function handleStart(): Promise<void> {
+    async function handleStart() {
         if (Tone.Transport.state === "started") {
-            Tone.Transport.pause();
-            setIsPlaying(false);
+            Tone.Transport.pause()
+            setIsPlaying(false)
         } else {
-            await Tone.start();
-            Tone.Transport.start();
-            setIsPlaying(true);
+            await Tone.start()
+            Tone.Transport.start()
+            setIsPlaying(true)
         }
     }
   
-    const handleSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
-      Tone.Transport.bpm.value = Number(e.target.value);
+    const handleSpeed = (e) => {
+      Tone.Transport.bpm.value = Number(e.target.value)
     };
   
-    const handleVol = (e: React.ChangeEvent<HTMLInputElement>) => {
-      Tone.Destination.volume.value = Tone.gainToDb(Number(e.target.value));
+    const handleVol = (e) => {
+      Tone.Destination.volume.value = Tone.gainToDb(Number(e.target.value))
     };
 
 
@@ -42,11 +42,11 @@ export default function Controls(): JSX.Element {
           
           <label className={styles.fader} id="speed-ctrl">
             <span>speed</span>
-            <input type="range" min={20} max={320} step={1} 
+            <input type="range" min={20} max={300} step={1} 
                 defaultValue={120} onChange={handleSpeed} />
           </label>
   
         </div>
-    );
+    )
   }
   
