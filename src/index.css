@@ -1,6 +1,6 @@
-/*********** main index.css ***********/
+/*********** index.css ***********/
 
 :root { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 16px; }
 
-body { display: grid; place-content: center; min-height: 100vh;
+body { display: grid; place-content: center; min-height: 120vh;
     background-color: #222; color: white; }
