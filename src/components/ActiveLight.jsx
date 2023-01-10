@@ -1,11 +1,11 @@
 
-import styles from './styles/ActiveLight.module.scss';
+import styles from './styles/ActiveLight.module.scss'
 
 export default function ActiveLight(props) {
 
     return(
         <div className={styles.row}>
-        {stepIds.map(stepId => (
+        {props.stepIds.map(stepId => (
           <label className={styles.active}>
             <input 
               type="radio" 
@@ -14,7 +14,7 @@ export default function ActiveLight(props) {
               disabled
               ref={(elm) => {
                 if (!elm) return;
-                activeRef.current[stepId] = elm;
+                props.activeRef.current[stepId] = elm;
               }}
               className={styles.active__input}
             />
@@ -22,5 +22,5 @@ export default function ActiveLight(props) {
           </label>
         ))}
       </div>
-    );
+    )
 }
