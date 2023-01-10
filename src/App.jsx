@@ -1,35 +1,55 @@
-import React from 'react';
-import * as Tone from 'tone';
+import React from 'react'
+import * as Tone from 'tone'
 
-import Controls from './components/Controls';
-import SampleLabels from './components/SampleLabels';
-import ThemeSwitch from './components/ThemeSwitch';
+import Controls from './components/Controls'
+import SampleLabels from './components/SampleLabels'
+import ThemeSwitch from './components/ThemeSwitch'
 
-import styles from './App.module.scss';
+import styles from './App.module.scss'
 
-const NOTE = 'C2';
+const NOTE = 'C2'
 
-type Track = {
-  id: number;
-  sampler: Tone.Sampler;
-};
-
-type Props = {
-  samples: {url:string; name: string; }[];
-  numOfSteps: number;
-};
+Track = {
+  id: number,
+  sampler: Tone.Sampler
+}
 
 
+// todo have two sounds be the default, snare and clap
+// todo add/delete row function
+// todo select list of samples on add row
+// todo sample upload
 
-export default function App({ samples, numOfSteps }) {
+// todo use this const as the default and with UI to change it
+const numSteps = 24
 
-  const trkRef = React.useRef<Track[]>([]);
-  const stepRef = React.useRef<HTMLInputElement[][]>([[]]);
-  const activeRef = React.useRef<HTMLInputElement[]>([]);
-  const seqRef = React.useRef<Tone.Sequence | null>(null);
+const samples = [
+  {
+    url: "/snare.wav",
+    name: "snare"
+  },{
+    url: "/clap.wav",
+    name: "clap"
+  },{
+    url: "/hat-closed.wav",
+    name: "hat"
+  },{
+    url: "/kick.wav",
+    name: "kick"
+  },
+]
 
-  const trackIds = [...Array(samples.length).keys()];
-  const stepIds = [...Array(numOfSteps).keys()];
+
+
+export default function App() {
+
+  const trkRef = React.useRef<Track[]>([])
+  const stepRef = React.useRef<HTMLInputElement[][]>([[]])
+  const activeRef = React.useRef<HTMLInputElement[]>([])
+  const seqRef = React.useRef<Tone.Sequence | null>(null)
+
+  const trackIds = [...Array(samples.length).keys()]
+  const stepIds = [...Array(numSteps).keys()]
 
   React.useEffect(() => {
     
@@ -42,7 +62,7 @@ export default function App({ samples, numOfSteps }) {
           [NOTE]: sample.url,
         },
       }).toDestination(),
-    }));
+    }))
 
 
     // start a new Tone Sequence
@@ -50,19 +70,19 @@ export default function App({ samples, numOfSteps }) {
       (time, step) => {
         trkRef.current.forEach(trk => {
           if (stepRef.current[trk.id]?.[step]?.checked) {
-            trk.sampler.triggerAttack(NOTE, time);
+            trk.sampler.triggerAttack(NOTE, time)
           }
-          activeRef.current[step].checked = true;
-        });
+          activeRef.current[step].checked = true
+        })
       }, [...stepIds]
-    ).start(0);
+    ).start(0)
 
     return () => {
       // todo look into this
-      seqRef.current?.dispose();
-      trkRef.current.forEach((trk) => void trk.sampler.dispose());
-    };
-  }, [samples, numOfSteps]);
+      seqRef.current?.dispose()
+      trkRef.current.forEach((trk) => void trk.sampler.dispose())
+    }
+  }, [samples, numSteps])
 
   return (
     <div className={styles.container}>
@@ -82,8 +102,8 @@ export default function App({ samples, numOfSteps }) {
                 id={"active-" + stepId} 
                 disabled
                 ref={(elm) => {
-                  if (!elm) return;
-                  activeRef.current[stepId] = elm;
+                  if (!elm) return
+                  activeRef.current[stepId] = elm
                 }}
                 className={styles.active__input}
               />
@@ -105,16 +125,16 @@ export default function App({ samples, numOfSteps }) {
                       type="checkbox" 
                       className={styles.cell__input}
                       ref={(elm) => {
-                        if (!elm) return;
+                        if (!elm) return
                         if (!stepRef.current[trackId]) {
-                          stepRef.current[trackId] = [];
+                          stepRef.current[trackId] = []
                         }
-                        stepRef.current[trackId][stepId] = elm;
+                        stepRef.current[trackId][stepId] = elm
                       }}
                     />
                     <div className={styles.cell__content}></div>
                   </label>
-                );
+                )
               })}
             </div>
           ))}
@@ -124,5 +144,5 @@ export default function App({ samples, numOfSteps }) {
       <Controls />
 
     </div>
-  );
+  )
 }
