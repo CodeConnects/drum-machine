@@ -21,15 +21,15 @@ type Props = {
 
 
 
-export default function App({ samples, numOfSteps }:Props) {
+export default function App({ samples, numOfSteps }) {
 
   const trkRef = React.useRef<Track[]>([]);
   const stepRef = React.useRef<HTMLInputElement[][]>([[]]);
   const activeRef = React.useRef<HTMLInputElement[]>([]);
   const seqRef = React.useRef<Tone.Sequence | null>(null);
 
-  const trackIds = [...Array(samples.length).keys()] as const;
-  const stepIds = [...Array(numOfSteps).keys()] as const;
+  const trackIds = [...Array(samples.length).keys()];
+  const stepIds = [...Array(numOfSteps).keys()];
 
   React.useEffect(() => {
     

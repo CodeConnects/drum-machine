@@ -1,9 +1,9 @@
 
 import styles from './styles/ActiveLight.module.scss';
 
-export default function ActiveLight(/*stepIds, activeRef*/) {
+export default function ActiveLight(props) {
 
-    /*return(
+    return(
         <div className={styles.row}>
         {stepIds.map(stepId => (
           <label className={styles.active}>
@@ -22,5 +22,5 @@ export default function ActiveLight(/*stepIds, activeRef*/) {
           </label>
         ))}
       </div>
-    );*/
+    );
 }
