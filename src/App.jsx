@@ -29,6 +29,7 @@ export default function App() {
   React.useEffect(() => {
     tracksRef.current = samples.map((sample, i) => ({
       id: i,
+      key: "track"+i,
       sampler: new Tone.Sampler({
         urls: {
           [NOTE]: sample.url,
