@@ -2,60 +2,32 @@ import React from 'react'
 import * as Tone from 'tone'
 
 import Controls from './components/Controls'
-import SampleLabels from './components/SampleLabels'
 import ThemeSwitch from './components/ThemeSwitch'
 
 import styles from './App.module.scss'
 
+const numSteps = 24
 const NOTE = 'C2'
 
-Track = {
-  id: number,
-  sampler: Tone.Sampler
-}
-
-
-// todo have two sounds be the default, snare and clap
-// todo add/delete row function
-// todo select list of samples on add row
-// todo sample upload
-
-// todo use this const as the default and with UI to change it
-const numSteps = 24
-
 const samples = [
-  {
-    url: "/snare.wav",
-    name: "snare"
-  },{
-    url: "/clap.wav",
-    name: "clap"
-  },{
-    url: "/hat-closed.wav",
-    name: "hat"
-  },{
-    url: "/kick.wav",
-    name: "kick"
-  },
+  { url: "/snare.wav", name: "snare" },
+  { url: "/clap.wav", name: "clap" },
+  { url: "/hat-closed.wav", name: "hat" },
+  { url: "/kick.wav", name: "kick" },
 ]
-
-
 
 export default function App() {
 
-  const trkRef = React.useRef<Track[]>([])
-  const stepRef = React.useRef<HTMLInputElement[][]>([[]])
-  const activeRef = React.useRef<HTMLInputElement[]>([])
-  const seqRef = React.useRef<Tone.Sequence | null>(null)
+  const tracksRef = React.useRef([])
+  const stepsRef = React.useRef([[]])
+  const activeRef = React.useRef([])
+  const seqRef = React.useRef()
 
   const trackIds = [...Array(samples.length).keys()]
   const stepIds = [...Array(numSteps).keys()]
 
   React.useEffect(() => {
-    
-    // iterate through selected samples
-    // create a new Tone Sampler for each sample
-    trkRef.current = samples.map((sample, i) => ({
+    tracksRef.current = samples.map((sample, i) => ({
       id: i,
       sampler: new Tone.Sampler({
         urls: {
@@ -63,24 +35,22 @@ export default function App() {
         },
       }).toDestination(),
     }))
-
-
-    // start a new Tone Sequence
     seqRef.current = new Tone.Sequence(
       (time, step) => {
-        trkRef.current.forEach(trk => {
-          if (stepRef.current[trk.id]?.[step]?.checked) {
+        tracksRef.current.map((trk) => {
+          if (stepsRef.current[trk.id]?.[step]?.checked) {
             trk.sampler.triggerAttack(NOTE, time)
           }
           activeRef.current[step].checked = true
         })
-      }, [...stepIds]
-    ).start(0)
+      },
+      [...stepIds], "16n"
+    )
+    seqRef.current.start(0)
 
     return () => {
-      // todo look into this
       seqRef.current?.dispose()
-      trkRef.current.forEach((trk) => void trk.sampler.dispose())
+      tracksRef.current.map((trk) => trk.sampler.dispose())
     }
   }, [samples, numSteps])
 
@@ -89,30 +59,31 @@ export default function App() {
 
       <ThemeSwitch />
 
-      <SampleLabels />
-
-      <div className={styles.grid}>
+      <div className={styles.soundLabels}>
+        {samples.map((sample) => (
+          <div key={sample.id}>{sample.name}</div>
+        ))}
+      </div>
       
+      <div className={styles.grid}>
         <div className={styles.row}>
-          {stepIds.map(stepId => (
-            <label className={styles.active}>
-              <input 
-                type="radio" 
-                name="active" 
-                id={"active-" + stepId} 
+          {stepIds.map((stepId) => (
+            <label key={stepId} className={styles.active}>
+              <input
+                type="radio"
+                name="active"
+                id={"active" + "-" + stepId}
                 disabled
                 ref={(elm) => {
-                  if (!elm) return
-                  activeRef.current[stepId] = elm
+                  if (!elm) return;
+                  activeRef.current[stepId] = elm;
                 }}
                 className={styles.active__input}
               />
-              <div className={styles.active__content} ></div>
+              <div className={styles.active__content} />
             </label>
           ))}
         </div>
-
-
         <div className={styles.cellList}>
           {trackIds.map((trackId) => (
             <div key={trackId} className={styles.row}>
@@ -120,19 +91,20 @@ export default function App() {
                 const id = trackId + "-" + stepId;
                 return (
                   <label key={id} className={styles.cell}>
-                    <input 
-                      id={id} 
-                      type="checkbox" 
-                      className={styles.cell__input}
+                    <input
+                      key={id}
+                      id={id}
+                      type="checkbox"
                       ref={(elm) => {
-                        if (!elm) return
-                        if (!stepRef.current[trackId]) {
-                          stepRef.current[trackId] = []
+                        if (!elm) return;
+                        if (!stepsRef.current[trackId]) {
+                          stepsRef.current[trackId] = []
                         }
-                        stepRef.current[trackId][stepId] = elm
+                        stepsRef.current[trackId][stepId] = elm
                       }}
+                      className={styles.cell__input}
                     />
-                    <div className={styles.cell__content}></div>
+                    <div className={styles.cell__content} />
                   </label>
                 )
               })}
