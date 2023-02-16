@@ -1,5 +1,5 @@
 ## Drum machine sequencer
 
-Online sequencer app built with React useing Next.js
+Online drum sequencer app, built with React using Next.js
 
 https://drums.stickits.app/
