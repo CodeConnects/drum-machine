@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import * as Tone from 'tone'
 
@@ -58,6 +58,19 @@ export default function Home() {
     }
   }, [samples, numSteps])
 
+  useEffect(() => {
+    const fadeTime = setTimeout(() => {
+      const element = document.getElementById("opening-title");
+      if (element) {
+        element.classList.add("fade-out");
+      }
+    }, 5000);
+
+    return () => {
+      clearTimeout(fadeTime);
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -67,6 +80,7 @@ export default function Home() {
         <link rel="icon" type="image/svg+xml" href="/drum-set.svg" />
       </Head>
 
+      <h1 className={styles.openingTitle}>Drum Sequencer</h1>
 
       <div className={styles.container}>
 
