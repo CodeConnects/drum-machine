@@ -1,7 +1,7 @@
 /***************** Home.module.css ***************/
 
-$cellHeight: 40px;
-$rowGap: 8px;
+$cellHeight: 36px;
+$cellWidth: 36px;
 $lightBg: #ccc;
 $cellBg: #fff;
 
@@ -17,31 +17,32 @@ $cellBg: #fff;
   position: absolute;
 }
 
-.openingTitle {
+#openingTitle {
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-align: center;
-  font-size: 2rem;
   margin: 40px 0px;
   padding: 0;
 }
 
+.fadeOut {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
 .container {
-  display: grid;
-  row-gap: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 0px 50px;
 }
 
 .grid {
   display: flex;
   flex-direction: column;
-  row-gap: $rowGap;
-}
-
-.row {
-  display: flex;
-  column-gap: 8px;
-  
-  & > *:nth-child(4n):not(:last-child) {
-    margin-right: 8px;
-  }
+  justify-content: center;
 }
 
 .active {
@@ -57,14 +58,13 @@ $cellBg: #fff;
     height: 14px;
     background-color: $lightBg; 
     border-radius: 999px;
-    margin: 0 8px;
+    margin: 0 auto;
   }
 }
 
 .cellList {
   display: flex;
   flex-direction: column;
-  row-gap: $rowGap;
 }
 
 .cell { $cell: &; cursor: pointer; 
@@ -79,16 +79,33 @@ $cellBg: #fff;
     }
   }
   &__content {
-    width: 30px;
+    width: $cellWidth;
     height: $cellHeight;
     background-color: $cellBg;
     border-radius: 3px;
+    margin: 5px;
   }
 }
 
-.soundLabels {
-  padding:20px 8px 0 0;
-  text-align: center; 
-  display: grid;
-  align-items: center;
+.measure { 
+  background-color: #ccc;
+  display: flex;
+  margin: 0px 6px 20px;
+  flex-direction: column;
+}
+
+.measure div {
+  display: flex;
+  flex-direction: row;
+}
+
+.activeLights {
+  background: #222;
+}
+.activeLights label {
+  width: 25%;
+  margin-bottom: 6px;
+}
+.activeLights label div {
+  margin: 0px auto;
 }
