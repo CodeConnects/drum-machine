@@ -6,6 +6,7 @@ Built with React.js using Next.js and the amazing Tone.js web audio framework
 
 https://drum-machine-one-snowy.vercel.app/
 
+----------------
 
 ## Installing locally
 
