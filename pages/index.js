@@ -80,7 +80,7 @@ export default function Home() {
         <link rel="icon" type="image/svg+xml" href="/drum-set.svg" />
       </Head>
 
-      <h1 className={styles.openingTitle}>Drum Sequencer</h1>
+      <h1 className={styles.openingTitle}>Drum Machine Sequencer</h1>
 
       <div className={styles.container}>
 
