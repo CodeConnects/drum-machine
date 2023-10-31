@@ -11,13 +11,12 @@ Clone the repo:
 
 ```bash
 git clone https://github.com/CodeConnects/drum-machine.git
-cd drum-machine
 ```
 
 Install dependencies:
 
 ```bash
-
+cd drum-machine
 npm install
 ```
 
@@ -27,6 +26,7 @@ First, run the development server:
 
 ```bash
 npm run dev
+```
 
 Next, build the app for production:
 
