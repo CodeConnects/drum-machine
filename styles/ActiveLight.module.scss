@@ -1,0 +1,24 @@
+$lightBg: #ccc;
+
+@mixin invisibleInput { border: 0px; height: 1px; width: 1px; 
+  margin: -1px; padding: 0px;
+  clip: rect(0px, 0px, 0px, 0px); overflow: hidden; 
+  white-space: nowrap; position: absolute; }
+
+.row { display: flex; column-gap: 8px;
+  & > *:nth-child(4n):not(:last-child) { margin-right: 8px; }
+}
+
+.active {
+  $active: &;
+  &__input { 
+    @include invisibleInput;
+    &:checked + #{$active}__content { 
+        background-color: #ff5b06; 
+    }
+  }
+  &__content { 
+    width: 14px; height: 14px; background-color: $lightBg; 
+    border-radius: 999px; margin: 0 8px;
+  }
+}

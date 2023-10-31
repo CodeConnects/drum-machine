@@ -3,6 +3,7 @@ import Head from 'next/head'
 import * as Tone from 'tone'
 
 import Controls from '../components/Controls'
+import ActiveLight from '../components/ActiveLight'
 import ThemeSwitch from '../components/ThemeSwitch'
 
 import styles from '../styles/Home.module.scss'
@@ -78,24 +79,9 @@ export default function Home() {
         </div>
         
         <div className={styles.grid}>
-          <div className={styles.row}>
-            {stepIds.map((stepId) => (
-              <label key={stepId} className={styles.active}>
-                <input
-                  type="radio"
-                  name="active"
-                  id={"active" + "-" + stepId}
-                  disabled
-                  ref={(elm) => {
-                    if (!elm) return;
-                    activeRef.current[stepId] = elm;
-                  }}
-                  className={styles.active__input}
-                />
-                <div className={styles.active__content} />
-              </label>
-            ))}
-          </div>
+
+          <ActiveLight stepIds={stepIds} activeRef={activeRef} />
+          
           <div className={styles.cellList}>
             {trackIds.map((trackId) => (
               <div key={trackId} className={styles.row}>

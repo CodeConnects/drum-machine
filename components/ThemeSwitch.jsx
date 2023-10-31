@@ -1,9 +1,11 @@
-import styles from './styles/ThemeSwitch.module.scss'
+import styles from '../styles/ThemeSwitch.module.scss'
 
-export default function ThemeSwitch(){
+function ThemeSwitch() {
     return(
         <div className={styles.themeSwitch}>
             
         </div>
     )
 }
+
+export default ThemeSwitch;

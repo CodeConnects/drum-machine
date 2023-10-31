@@ -1,4 +1,4 @@
-/***************** App.module.css ***************/
+/***************** Home.module.css ***************/
 
 $cellHeight: 40px;
 $rowGap: 8px;
@@ -20,17 +20,17 @@ $cellBg: #fff;
 }
 
 .active {
-    $active: &;
-    &__input { 
-        @include invisibleInput;
-        &:checked + #{$active}__content { 
-            background-color: #ff5b06; 
-        }
+  $active: &;
+  &__input { 
+    @include invisibleInput;
+    &:checked + #{$active}__content { 
+        background-color: #ff5b06; 
     }
-    &__content { 
-        width: 14px; height: 14px; background-color: $lightBg; 
-        border-radius: 999px; margin: 0 8px;
-    }
+  }
+  &__content { 
+    width: 14px; height: 14px; background-color: $lightBg; 
+    border-radius: 999px; margin: 0 8px;
+  }
 }
 
 .cellList { display: flex; flex-direction: column; row-gap: $rowGap; }
