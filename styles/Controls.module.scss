@@ -1,14 +1,11 @@
 /***************** Controls.module.css ***************/
 
-$columnGap: 16px;
-
 .controls {
   display: flex;
-  flex-direction: row-reverse; 
-  column-gap: $columnGap;
-  grid-column: 2;
-  justify-content: center;
+  column-gap: 40px;
   margin-top: 28px;
+  padding-left: 60px;
+  flex-wrap: wrap;
 }
 
 .button {
@@ -31,5 +28,5 @@ $columnGap: 16px;
 .fader {
   display: flex;
   align-items: center;
-  column-gap: $columnGap;
+  column-gap: 6px;
 }
