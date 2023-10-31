@@ -1,6 +1,13 @@
 /*********** globals.css ***********/
 
-:root { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 16px; }
+:root {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+}
 
-body { display: grid; place-content: center; min-height: 120vh;
-    background-color: #222; color: white; }
+body { 
+  display: grid;
+  place-content: center;
+  background-color: #222; 
+  color: white;
+}

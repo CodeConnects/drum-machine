@@ -5,18 +5,43 @@ $rowGap: 8px;
 $lightBg: #ccc;
 $cellBg: #fff;
 
+@mixin invisibleInput {
+  border: 0px;
+  height: 1px;
+  width: 1px; 
+  margin: -1px;
+  padding: 0px;
+  clip: rect(0px, 0px, 0px, 0px);
+  overflow: hidden; 
+  white-space: nowrap;
+  position: absolute;
+}
 
-@mixin invisibleInput { border: 0px; height: 1px; width: 1px; 
-    margin: -1px; padding: 0px;
-    clip: rect(0px, 0px, 0px, 0px); overflow: hidden; 
-    white-space: nowrap; position: absolute; }
+.openingTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin: 40px 0px;
+  padding: 0;
+}
 
-.container { display: grid; row-gap: 16px; }
+.container {
+  display: grid;
+  row-gap: 16px;
+}
 
-.grid { display: flex; flex-direction: column; row-gap: $rowGap; }
+.grid {
+  display: flex;
+  flex-direction: column;
+  row-gap: $rowGap;
+}
 
-.row { display: flex; column-gap: 8px;
-    & > *:nth-child(4n):not(:last-child) { margin-right: 8px; }
+.row {
+  display: flex;
+  column-gap: 8px;
+  
+  & > *:nth-child(4n):not(:last-child) {
+    margin-right: 8px;
+  }
 }
 
 .active {
@@ -24,30 +49,46 @@ $cellBg: #fff;
   &__input { 
     @include invisibleInput;
     &:checked + #{$active}__content { 
-        background-color: #ff5b06; 
+      background-color: #ff5b06; 
     }
   }
   &__content { 
-    width: 14px; height: 14px; background-color: $lightBg; 
-    border-radius: 999px; margin: 0 8px;
+    width: 14px;
+    height: 14px;
+    background-color: $lightBg; 
+    border-radius: 999px;
+    margin: 0 8px;
   }
 }
 
-.cellList { display: flex; flex-direction: column; row-gap: $rowGap; }
-
-.cell { $cell: &; cursor: pointer; 
-    &__input { 
-        @include invisibleInput();
-        &:checked + #{$cell}__content { 
-            background-color: #005da5; 
-        }
-        &:focus-visible + #{$cell}__content {
-            outline: solid 4px #90cdf4; outline-offset: 2px;
-        }
-    }
-    &__content { width: 30px; height: $cellHeight; 
-        background-color: $cellBg; border-radius: 3px; }
+.cellList {
+  display: flex;
+  flex-direction: column;
+  row-gap: $rowGap;
 }
 
-.soundLabels { padding:20px 8px 0 0; text-align: center; 
-    display: grid; align-items: center; }
+.cell { $cell: &; cursor: pointer; 
+  &__input { 
+    @include invisibleInput();
+    &:checked + #{$cell}__content { 
+      background-color: #005da5; 
+    }
+    &:focus-visible + #{$cell}__content {
+      outline: solid 4px #90cdf4;
+      outline-offset: 2px;
+    }
+  }
+  &__content {
+    width: 30px;
+    height: $cellHeight;
+    background-color: $cellBg;
+    border-radius: 3px;
+  }
+}
+
+.soundLabels {
+  padding:20px 8px 0 0;
+  text-align: center; 
+  display: grid;
+  align-items: center;
+}
