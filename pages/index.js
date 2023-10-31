@@ -26,10 +26,7 @@ export default function Home() {
   const activeRef = React.useRef([])
   const seqRef = React.useRef()
 
-  const trackIds = [...Array(samples.length).keys()]
   const stepIds = [...Array( (beatsPerMeasure * measures) ).keys()]
-  const measureIds = [1,2,3,4,5,6];
-  const BPMIds = [1,2,3,4];
 
   React.useEffect(() => {
     tracksRef.current = samples.map((sample, i) => ({
