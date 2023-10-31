@@ -14,10 +14,10 @@ const beatsPerMeasure = 4;
 const NOTE = 'C2'
 
 const samples = [
-  { url: "/snare.wav", name: "snare" },
-  { url: "/clap.wav", name: "clap" },
-  { url: "/hat-closed.wav", name: "hat" },
-  { url: "/kick.wav", name: "kick" },
+  { url: "/snare.wav", name: "Snare" },
+  { url: "/clap.wav", name: "Clap" },
+  { url: "/hat-closed.wav", name: "Hat" },
+  { url: "/kick.wav", name: "Kick" },
 ]
 
 export default function Home() {
