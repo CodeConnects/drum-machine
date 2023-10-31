@@ -8,8 +8,6 @@ https://drum-machine-one-snowy.vercel.app/
 
 &nbsp;<br>
 
-&nbsp;<br>
-
 ---------------- 
 
 ## Installing locally
