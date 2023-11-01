@@ -1,4 +1,4 @@
-## Drum machine sequencer
+# Drum machine sequencer
 
 Browser based drum sequencer app
 
