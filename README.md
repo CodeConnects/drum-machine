@@ -1,6 +1,6 @@
 # Drum machine sequencer
 
-Browser based drum sequencer app
+## Browser based drum sequencer app
 
 Built with React.js using Next.js and the amazing Tone.js web audio framework
 
