@@ -1,11 +1,13 @@
 /***************** Controls.module.css ***************/
 
 .controls {
-  display: flex;
   column-gap: 40px;
-  margin-top: 28px;
+  margin-top: -10px;
+  margin-bottom: 32px;
   padding-left: 60px;
   flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
 }
 
 .button {
