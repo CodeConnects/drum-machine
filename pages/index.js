@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import * as Tone from 'tone'
 
@@ -21,41 +21,42 @@ const samples = [
 ]
 
 export default function Home() {
+  const [selectedSamples, setSelectedSamples] = useState(samples.map(() => samples[0].name)); // Initial selection
   const tracksRef = React.useRef([])
   const stepsRef = React.useRef([[]])
   const activeRef = React.useRef([])
   const seqRef = React.useRef()
 
-  const stepIds = [...Array( (beatsPerMeasure * measures) ).keys()]
+   const stepIds = [...Array((beatsPerMeasure * measures)).keys()];
 
   React.useEffect(() => {
-    tracksRef.current = samples.map((sample, i) => ({
+    tracksRef.current = selectedSamples.map((selectedSample, i) => ({
       id: i,
-      key: "track"+i,
+      key: "track" + i,
       sampler: new Tone.Sampler({
         urls: {
-          [NOTE]: sample.url,
+          [NOTE]: samples.find(sample => sample.name === selectedSample).url,
         },
       }).toDestination(),
-    }))
+    }));
     seqRef.current = new Tone.Sequence(
       (time, step) => {
-        tracksRef.current.map((trk) => {
+        tracksRef.current.forEach((trk) => {
           if (stepsRef.current[trk.id]?.[step]?.checked) {
-            trk.sampler.triggerAttack(NOTE, time)
+            trk.sampler.triggerAttack(NOTE, time);
           }
-          activeRef.current[step].checked = true
-        })
+          activeRef.current[step].checked = true;
+        });
       },
       [...stepIds], "16n"
-    )
-    seqRef.current.start(0)
+    );
+    seqRef.current.start(0);
 
     return () => {
       seqRef.current?.dispose()
-      tracksRef.current.map((trk) => trk.sampler.dispose())
+      tracksRef.current.forEach((trk) => trk.sampler.dispose())
     }
-  }, [samples,  (beatsPerMeasure * measures) ])
+  }, [selectedSamples,  (beatsPerMeasure * measures) ])
 
   useEffect(() => {
     const fadeTime = setTimeout(() => {
@@ -85,7 +86,7 @@ export default function Home() {
 
         <ThemeSwitch />
 
-        <SoundLabels samples={samples} />
+        <SoundLabels samples={samples} selectedSamples={selectedSamples} />
         
         {Array.from({ length: measures }, (_, measureIndex) => (
           <div key={measureIndex} className={styles.measure}>
@@ -97,8 +98,8 @@ export default function Home() {
             </div>
             
             {/* Drum Pads for this measure */}
-            {samples.map((sample, trackId) => (
-              <div key={sample.name} className={styles.track}>
+            {selectedSamples.map((selectedSample, trackId) => (
+              <div key={selectedSample} className={styles.track}>
                 {Array.from({ length: beatsPerMeasure }, (_, beatIndex) => {
                   const stepId = beatIndex + measureIndex * beatsPerMeasure;
                   const id = `${trackId}-${stepId}`;
