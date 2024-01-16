@@ -1,6 +1,6 @@
 import styles from '../styles/SoundLabels.module.scss';
 
-const SoundLabels = ({ samples, selectedSamples }) => {
+const SoundLabels = ({ samples, selectedSamples, setSelectedSamples }) => {
   return (
     <div className={styles.soundLabels}>
 
@@ -12,6 +12,7 @@ const SoundLabels = ({ samples, selectedSamples }) => {
               const updatedSamples = [...selectedSamples];
               updatedSamples[trackId] = e.target.value;
               setSelectedSamples(updatedSamples);
+              //console.log(updatedSamples);
             }}
           >
             {samples.map((sample) => (
