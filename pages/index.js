@@ -9,7 +9,6 @@ import ThemeSwitch from '../components/ThemeSwitch'
 
 import styles from '../styles/Home.module.scss'
 
-const measures = 6;
 const beatsPerMeasure = 4;
 const NOTE = 'C2'
 
@@ -21,13 +20,26 @@ const samples = [
 ]
 
 export default function Home() {
-  const [selectedSamples, setSelectedSamples] = useState(samples.map(() => samples[0].name)); // Initial selection
+  const [measures, setMeasures] = useState(6);
+  const [selectedSamples, setSelectedSamples] = useState([
+    samples[0].name,
+    samples[1].name,
+    samples[2].name,
+    samples[3].name
+  ]);
   const tracksRef = React.useRef([])
   const stepsRef = React.useRef([[]])
   const activeRef = React.useRef([])
   const seqRef = React.useRef()
 
-   const stepIds = [...Array((beatsPerMeasure * measures)).keys()];
+  const stepIds = [...Array((beatsPerMeasure * measures)).keys()];
+
+  const handleClear = () => {
+    Tone.Transport.stop()
+    Tone.Transport.cancel()
+    Tone.Transport.position = 0
+    console.log('clear ran')
+  }
 
   React.useEffect(() => {
     tracksRef.current = selectedSamples.map((selectedSample, i) => ({
@@ -64,6 +76,7 @@ export default function Home() {
       if (element) {
         element.classList.add(styles.fadeOut);
       }
+      console.log(selectedSamples)
     }, 5000);
 
     return () => {
@@ -82,11 +95,21 @@ export default function Home() {
 
       <h1 id={styles.openingTitle}>Drum Machine Sequencer</h1>
 
+      <Controls 
+        handleClear={handleClear} 
+        setSelectedSamples={setSelectedSamples}
+        setMeasures={setMeasures}
+      />
+
       <div className={styles.container}>
 
         <ThemeSwitch />
 
-        <SoundLabels samples={samples} selectedSamples={selectedSamples} />
+        <SoundLabels 
+          samples={samples} 
+          selectedSamples={selectedSamples}
+          setSelectedSamples={setSelectedSamples}
+        />
         
         {Array.from({ length: measures }, (_, measureIndex) => (
           <div key={measureIndex} className={styles.measure}>
@@ -99,7 +122,7 @@ export default function Home() {
             
             {/* Drum Pads for this measure */}
             {selectedSamples.map((selectedSample, trackId) => (
-              <div key={selectedSample} className={styles.track}>
+              <div key={trackId} className={styles.track}>
                 {Array.from({ length: beatsPerMeasure }, (_, beatIndex) => {
                   const stepId = beatIndex + measureIndex * beatsPerMeasure;
                   const id = `${trackId}-${stepId}`;
@@ -126,8 +149,6 @@ export default function Home() {
           </div>
         ))}
       </div>
-
-      <Controls />
     </>
   )
 }
