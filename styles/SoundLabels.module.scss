@@ -1,9 +1,14 @@
 .soundLabels {
-  padding: 8px 0 0 0;
+  padding: 0;
   position: absolute;
-  left: 8px;
+  top:14px;
+  left: -10px;
   text-align: right;
-}
-.soundLabels div {
-  margin: 27px auto;
+
+  div {
+    margin: 11px auto;
+  }
+  select {
+    padding: 8px 0px;
+  }
 }
