@@ -35,9 +35,9 @@ export default function Home() {
   const stepIds = [...Array((beatsPerMeasure * measures)).keys()];
 
   const handleClear = () => {
-    Tone.Transport.stop()
-    Tone.Transport.cancel()
-    Tone.Transport.position = 0
+    //Tone.Transport.stop()
+    //Tone.Transport.cancel()
+    //Tone.Transport.position = 0
     console.log('clear ran')
   }
 
