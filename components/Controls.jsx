@@ -3,7 +3,7 @@ import * as Tone from 'tone'
 
 import styles from '../styles/Controls.module.scss'
 
-function Controls() {
+function Controls({ handleClear, setSelectedSamples, setMeasures }) {
 
   const [isPlaying, setIsPlaying] = React.useState(false)
 
@@ -56,6 +56,10 @@ function Controls() {
           defaultValue={0.5}
         />
       </label>
+
+      <button onClick={handleClear} className={styles.button}>
+        Clear
+      </button>
 
     </div>
   )
