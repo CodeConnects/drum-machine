@@ -1,8 +1,8 @@
-import styles from '../styles/SoundLabels.module.scss';
+import styles from '../styles/SoundPicker.module.scss';
 
-const SoundLabels = ({ samples, selectedSamples, setSelectedSamples }) => {
+const SoundPicker = ({ samples, selectedSamples, setSelectedSamples }) => {
   return (
-    <div className={styles.soundLabels}>
+    <div className={styles.soundPicker}>
 
       {selectedSamples.map((selectedSample, trackId) => (
         <div key={trackId}>
@@ -27,4 +27,4 @@ const SoundLabels = ({ samples, selectedSamples, setSelectedSamples }) => {
   );
 }
 
-export default SoundLabels;
+export default SoundPicker;

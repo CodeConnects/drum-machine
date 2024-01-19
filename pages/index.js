@@ -3,7 +3,7 @@ import Head from 'next/head'
 import * as Tone from 'tone'
 
 import Controls from '../components/Controls'
-import SoundLabels from '../components/SoundLabels'
+import SoundPicker from '../components/SoundPicker'
 import ActiveLight from '../components/ActiveLight'
 import ThemeSwitch from '../components/ThemeSwitch'
 
@@ -105,7 +105,7 @@ export default function Home() {
 
         <ThemeSwitch />
 
-        <SoundLabels 
+        <SoundPicker 
           samples={samples} 
           selectedSamples={selectedSamples}
           setSelectedSamples={setSelectedSamples}
