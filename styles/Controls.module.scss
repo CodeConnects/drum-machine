@@ -1,5 +1,8 @@
 /***************** Controls.module.css ***************/
 
+$blueBG: #005da5;
+$blueHover: #4281b2;
+
 .controls {
   column-gap: 40px;
   margin-top: -10px;
@@ -13,7 +16,7 @@
     border: none;
     cursor: pointer;
     appearance: none; 
-    background-color: #005da5; 
+    background-color: $blueBG; 
     color: white;
     width: 80px;
     line-height: 2;
@@ -22,7 +25,7 @@
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #4281b2;
+      background-color: $blueHover;
     }
   }
 
@@ -33,7 +36,7 @@
   }
 
   .controlSelect {
-    background-color: #005da5;
+    background-color: $blueBG; 
     color: #fff;
     padding: 8px 4px;
     appearance: none;
@@ -43,7 +46,7 @@
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #4281b2;
+      background-color: $blueHover;
     }
 
     label {
@@ -51,7 +54,7 @@
     }
 
     select {
-      padding: 4px;
+      padding: 2px;
       margin: 0 4px;
       cursor: pointer;
     }
