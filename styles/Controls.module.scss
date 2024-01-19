@@ -8,27 +8,52 @@
   flex-wrap: wrap;
   display: flex;
   justify-content: center;
-}
 
-.button {
-  border: none;
-  cursor: pointer;
-  appearance: none; 
-  background-color: #005da5; 
-  color: white;
-  width: 80px;
-  line-height: 2;
-  border-radius: 4px; 
-  font-weight: 700;
-  transition: background-color 0.3s;
+  .button {
+    border: none;
+    cursor: pointer;
+    appearance: none; 
+    background-color: #005da5; 
+    color: white;
+    width: 80px;
+    line-height: 2;
+    border-radius: 4px; 
+    font-weight: 700;
+    transition: background-color 0.3s;
 
-  &:hover {
-    background-color: #4281b2;
+    &:hover {
+      background-color: #4281b2;
+    }
   }
-}
 
-.fader {
-  display: flex;
-  align-items: center;
-  column-gap: 6px;
+  .fader {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+  }
+
+  .controlSelect {
+    background-color: #005da5;
+    color: #fff;
+    padding: 8px 4px;
+    appearance: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #4281b2;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    select {
+      padding: 4px;
+      margin: 0 4px;
+      cursor: pointer;
+    }
+  }
 }
