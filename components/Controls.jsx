@@ -57,18 +57,32 @@ function Controls({ handleClear, setSelectedSamples, setMeasures }) {
         />
       </label>
 
+      
+      <button onClick={handleClear} className={styles.button} disabled>
+        Load
+      </button>
+      
+      <button onClick={handleClear} className={styles.button} disabled>
+        Save
+      </button>
+      
       <button onClick={handleClear} className={styles.button} disabled>
         Clear
       </button>
 
+      <button onClick={handleClear} className={styles.button} disabled>
+        Reset
+      </button>
+
+
       <div className={styles.controlSelect}>
-        <label for="measures">Measures</label>
-        <select id="measures" name="measures">
+        <label htmlFor="measures">Measures</label>
+        <select id="measures" name="measures" defaultValue="6">
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
           <option value="5">5</option>
-          <option selected value="6">6</option>
+          <option value="6">6</option>
           <option value="7">7</option>
           <option value="8">8</option>
           <option value="9">9</option>
@@ -79,11 +93,11 @@ function Controls({ handleClear, setSelectedSamples, setMeasures }) {
       </div>
 
       <div className={styles.controlSelect}>
-        <label for="beats">Beats Per</label>
-        <select id="beats" name="beats">
+        <label htmlFor="beats">Beats Per</label>
+        <select id="beats" name="beats" defaultValue="4">
           <option value="2">2</option>
           <option value="3">3</option>
-          <option selected value="4">4</option>
+          <option value="4">4</option>
           <option value="5">5</option>
           <option value="6">6</option>
           <option value="7">7</option>
