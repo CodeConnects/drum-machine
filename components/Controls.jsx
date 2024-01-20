@@ -54,7 +54,7 @@ function Controls({ setSelectedSamples, setMeasures, setBeats }) {
   }
 
   return(
-    <div className={styles.controls}>
+    <div id="topControls" className={styles.controls}>
       
       <button onClick={handleStartStop} className={styles.button}>
         {isPlaying ? "Pause" : "Start"}
