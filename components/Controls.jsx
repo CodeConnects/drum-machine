@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Tone from 'tone'
 
-import styles from '../styles/Controls.module.scss'
+import styles from '../styles/Controls.scss'
 
 function Controls({ handleClear, setSelectedSamples, setMeasures }) {
 

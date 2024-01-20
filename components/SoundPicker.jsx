@@ -1,4 +1,4 @@
-import styles from '../styles/SoundPicker.module.scss';
+import styles from '../styles/SoundPicker.scss';
 
 const SoundPicker = ({ samples, selectedSamples, setSelectedSamples }) => {
   return (
