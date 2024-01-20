@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from '../styles/ActiveLight.scss'
+import styles from '../styles/ActiveLight.module.scss'
 
 const ActiveLight = ({ stepId, activeRef }) => {
 

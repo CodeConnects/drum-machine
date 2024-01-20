@@ -1,4 +1,4 @@
-import styles from '../styles/ThemeSwitch.scss'
+import styles from '../styles/ThemeSwitch.module.scss'
 
 function ThemeSwitch() {
     return(

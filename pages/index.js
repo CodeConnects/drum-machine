@@ -7,7 +7,7 @@ import SoundPicker from '../components/SoundPicker'
 import ActiveLight from '../components/ActiveLight'
 import ThemeSwitch from '../components/ThemeSwitch'
 
-import styles from '../styles/Home.scss'
+import styles from '../styles/Home.module.scss'
 
 const beatsPerMeasure = 4;
 const NOTE = 'C2'
