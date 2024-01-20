@@ -3,9 +3,28 @@ import * as Tone from 'tone'
 
 import styles from '../styles/Controls.module.scss'
 
-function Controls({ handleClear, setSelectedSamples, setMeasures }) {
+function Controls({ setSelectedSamples, setMeasures }) {
 
   const [isPlaying, setIsPlaying] = React.useState(false)
+
+  const handleLoad = () => {
+    console.log('load ran')
+  }
+
+  const handleSave = () => {
+    console.log('save ran')
+  }
+
+  const handleClear = () => {
+    //Tone.Transport.stop()
+    //Tone.Transport.cancel()
+    //Tone.Transport.position = 0
+    console.log('clear ran')
+  }
+ 
+  const handleReset = () => {
+    console.log('reset ran')
+  }
 
   const handleStartStop = async () => {
     if (Tone.Transport.state === "started") {
@@ -58,11 +77,11 @@ function Controls({ handleClear, setSelectedSamples, setMeasures }) {
       </label>
 
       
-      <button onClick={handleClear} className={styles.button} disabled>
+      <button onClick={handleLoad} className={styles.button} disabled>
         Load
       </button>
-      
-      <button onClick={handleClear} className={styles.button} disabled>
+
+      <button onClick={handleSave} className={styles.button} disabled>
         Save
       </button>
       
@@ -70,7 +89,7 @@ function Controls({ handleClear, setSelectedSamples, setMeasures }) {
         Clear
       </button>
 
-      <button onClick={handleClear} className={styles.button} disabled>
+      <button onClick={handleReset} className={styles.button} disabled>
         Reset
       </button>
 
