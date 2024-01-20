@@ -80,7 +80,7 @@ export default function Home() {
 
       }
       //console.log(selectedSamples)
-    }, 4000);
+    }, 5000);
 
     return () => {
       clearTimeout(fadeTime);
