@@ -8,7 +8,8 @@ $blueHover: #4281b2;
   row-gap: 24px;
   margin-top: -10px;
   margin-bottom: 32px;
-  padding-left: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
   flex-wrap: wrap;
   display: flex;
   justify-content: center;
@@ -39,7 +40,7 @@ $blueHover: #4281b2;
   .controlSelect {
     background-color: $blueBG; 
     color: #fff;
-    padding: 8px 4px;
+    padding: 5px 4px;
     appearance: none;
     border: none;
     border-radius: 4px;
