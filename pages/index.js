@@ -4,12 +4,11 @@ import * as Tone from 'tone'
 
 import Controls from '../components/Controls'
 import SoundPicker from '../components/SoundPicker'
-import ActiveLight from '../components/ActiveIndicator'
+import ActiveIndicator from '../components/ActiveIndicator'
 import ThemeSwitch from '../components/ThemeSwitch'
 
 import styles from '../styles/Home.module.scss'
 
-const beatsPerMeasure = 4;
 const NOTE = 'C2'
 
 const samples = [
@@ -21,6 +20,7 @@ const samples = [
 
 export default function Home() {
   const [measures, setMeasures] = useState(6);
+  const [beats, setBeats] = useState(4);
   const [selectedSamples, setSelectedSamples] = useState([
     samples[0].name,
     samples[1].name,
@@ -32,7 +32,8 @@ export default function Home() {
   const activeRef = React.useRef([])
   const seqRef = React.useRef()
 
-  const stepIds = [...Array((beatsPerMeasure * measures)).keys()];
+  // setting the full length of the sequence of measures with beats
+  const stepIds = [...Array((beats * measures)).keys()];
 
   React.useEffect(() => {
     tracksRef.current = selectedSamples.map((selectedSample, i) => ({
@@ -61,7 +62,7 @@ export default function Home() {
       seqRef.current?.dispose()
       tracksRef.current.forEach((trk) => trk.sampler.dispose())
     }
-  }, [selectedSamples,  (beatsPerMeasure * measures) ])
+  }, [selectedSamples,  (beats * measures) ])
 
   useEffect(() => {
     const fadeTime = setTimeout(() => {
@@ -91,6 +92,7 @@ export default function Home() {
       <Controls 
         setSelectedSamples={setSelectedSamples}
         setMeasures={setMeasures}
+        setBeats={setBeats}
       />
 
       <div className={styles.container}>
@@ -107,16 +109,18 @@ export default function Home() {
           <div key={measureIndex} className={styles.measure}>
             {/* Active Indicators for this measure */}
             <div className={styles.activeIndicators}>
-              {Array.from({ length: beatsPerMeasure }, (_, beatIndex) => (
-                <ActiveLight key={beatIndex} stepId={beatIndex + measureIndex * beatsPerMeasure} activeRef={activeRef}/>
+              {Array.from({ length: beats }, (_, beatIndex) => (
+                <ActiveIndicator key={beatIndex} stepId={beatIndex + measureIndex * beats} activeRef={activeRef}/>
               ))}
             </div>
             
             {/* Drum Pads for this measure */}
             {selectedSamples.map((selectedSample, trackId) => (
+              
+              /* one full row of notes */
               <div key={trackId} className={styles.track}>
-                {Array.from({ length: beatsPerMeasure }, (_, beatIndex) => {
-                  const stepId = beatIndex + measureIndex * beatsPerMeasure;
+                {Array.from({ length: beats }, (_, beatIndex) => {
+                  const stepId = beatIndex + measureIndex * beats;
                   const id = `${trackId}-${stepId}`;
                   return (
                     <label key={id} className={styles.cell}>
@@ -137,6 +141,7 @@ export default function Home() {
                   );
                 })}
               </div>
+
             ))}
           </div>
         ))}
