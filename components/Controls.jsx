@@ -3,7 +3,7 @@ import * as Tone from 'tone'
 
 import styles from '../styles/Controls.module.scss'
 
-function Controls({ setSelectedSamples, setMeasures }) {
+function Controls({ setSelectedSamples, setMeasures, setBeats }) {
 
   const [isPlaying, setIsPlaying] = React.useState(false)
 
@@ -43,6 +43,14 @@ function Controls({ setSelectedSamples, setMeasures }) {
 
   const handleVolumeChange = (e) => {
     Tone.Destination.volume.value = Tone.gainToDb(e.target.value)
+  }
+
+  const handleMeasureChange = (e) => {
+    setMeasures(e.target.value)
+  }
+
+  const handleBeatsChange = (e) => {
+    setBeats(e.target.value)
   }
 
   return(
@@ -96,7 +104,7 @@ function Controls({ setSelectedSamples, setMeasures }) {
 
       <div className={styles.controlSelect}>
         <label htmlFor="measures">Measures</label>
-        <select id="measures" name="measures" defaultValue="6">
+        <select id="measures" name="measures" defaultValue="6" onChange={handleMeasureChange}>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
@@ -113,7 +121,7 @@ function Controls({ setSelectedSamples, setMeasures }) {
 
       <div className={styles.controlSelect}>
         <label htmlFor="beats">Beats Per</label>
-        <select id="beats" name="beats" defaultValue="4">
+        <select id="beats" name="beats" defaultValue="4" onChange={handleBeatsChange}>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
