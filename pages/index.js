@@ -71,16 +71,16 @@ export default function Home() {
         element.classList.add(styles.fadeOut);
 
         // Start second animation after 5 seconds
-        
-        //const controlsElement = document.getElementsByClassName(styles.controls)[0];
-        //if (controlsElement) {
-          //controlsElement.classList.add(styles.pullUp);
-          //console.log('pullUp fired: '+controlsElement);
-        //}
+
+        const controlsElement = document.getElementById('topControls');
+        if (controlsElement) {
+          controlsElement.classList.add(styles.pullUp);
+          console.log('pullUp fired: '+controlsElement);
+        }
 
       }
       //console.log(selectedSamples)
-    }, 5000);
+    }, 4000);
 
     return () => {
       clearTimeout(fadeTime);
@@ -98,7 +98,7 @@ export default function Home() {
 
       <h1 id={styles.openingTitle}>Drum Machine Sequencer</h1>
 
-      <Controls 
+      <Controls
         setSelectedSamples={setSelectedSamples}
         setMeasures={setMeasures}
         setBeats={setBeats}
