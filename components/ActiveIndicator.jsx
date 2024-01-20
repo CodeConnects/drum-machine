@@ -1,8 +1,8 @@
 import React from 'react';
 
-import styles from '../styles/ActiveLight.module.scss'
+import styles from '../styles/ActiveIndicator.module.scss'
 
-const ActiveLight = ({ stepId, activeRef }) => {
+const ActiveIndicator = ({ stepId, activeRef }) => {
 
   return(
     <label key={stepId} className={styles.active}>
@@ -22,4 +22,4 @@ const ActiveLight = ({ stepId, activeRef }) => {
   )
 };
 
-export default ActiveLight;
+export default ActiveIndicator;

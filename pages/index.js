@@ -4,7 +4,7 @@ import * as Tone from 'tone'
 
 import Controls from '../components/Controls'
 import SoundPicker from '../components/SoundPicker'
-import ActiveLight from '../components/ActiveLight'
+import ActiveLight from '../components/ActiveIndicator'
 import ThemeSwitch from '../components/ThemeSwitch'
 
 import styles from '../styles/Home.module.scss'
@@ -33,13 +33,6 @@ export default function Home() {
   const seqRef = React.useRef()
 
   const stepIds = [...Array((beatsPerMeasure * measures)).keys()];
-
-  const handleClear = () => {
-    //Tone.Transport.stop()
-    //Tone.Transport.cancel()
-    //Tone.Transport.position = 0
-    console.log('clear ran')
-  }
 
   React.useEffect(() => {
     tracksRef.current = selectedSamples.map((selectedSample, i) => ({
@@ -96,7 +89,6 @@ export default function Home() {
       <h1 id={styles.openingTitle}>Drum Machine Sequencer</h1>
 
       <Controls 
-        handleClear={handleClear} 
         setSelectedSamples={setSelectedSamples}
         setMeasures={setMeasures}
       />
@@ -113,8 +105,8 @@ export default function Home() {
         
         {Array.from({ length: measures }, (_, measureIndex) => (
           <div key={measureIndex} className={styles.measure}>
-            {/* Active Lights for this measure */}
-            <div className={styles.activeLights}>
+            {/* Active Indicators for this measure */}
+            <div className={styles.activeIndicators}>
               {Array.from({ length: beatsPerMeasure }, (_, beatIndex) => (
                 <ActiveLight key={beatIndex} stepId={beatIndex + measureIndex * beatsPerMeasure} activeRef={activeRef}/>
               ))}
